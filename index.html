@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For You 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Baloo+2:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* BODY */
+body{
+  height:100vh;
+  overflow:hidden;
+  background:#ffd6e8;
+  font-family:'Patrick Hand', cursive;
+}
+
+/* SCREEN */
+.screen{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center;
+  transition:.6s;
+}
+.hidden{opacity:0;pointer-events:none;transform:scale(.98)}
+
+/* HEADINGS */
+h1{
+  font-family:'Patrick Hand', cursive;
+  font-size:3rem;
+  color:#c2185b;
+  transform:rotate(-2deg);
+}
+
+/* HINT */
+p{color:#444;margin-top:10px}
+.hint{opacity:.7;margin-top:18px}
+
+/* BUTTONS */
+button{
+  padding:12px 28px;
+  margin:10px;
+  border:none;
+  border-radius:30px;
+  font-size:1.1rem;
+  cursor:pointer;
+}
+#yes{background:#ff4d88;color:#fff}
+#no{background:#fff;color:#333;position:absolute}
+
+/* DIALOG BOX (NO TEXT + OTHER BOXES) */
+.dialog-box{
+  margin-top:22px;
+  padding:20px 26px;
+  max-width:82%;
+  background:#b0124b;
+  color:#fff;
+  border-radius:18px;
+  font-size:1.35rem;
+  line-height:1.6;
+  box-shadow:0 12px 28px rgba(0,0,0,.35);
+  letter-spacing:0.5px;
+}
+
+/* FIX: NO TEXT ALWAYS VISIBLE */
+#noText{
+  position:fixed;
+  bottom:18%;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:99999;
+  pointer-events:none;
+}
+
+/* FIRST SCREEN ASK TEXT */
+#s1 p{
+  font-family:'Comic Neue', cursive;
+  background:linear-gradient(135deg,#ffd1e8,#fff);
+  padding:20px 26px;
+  border-radius:22px;
+  font-size:1.45rem;
+  line-height:1.6;
+  max-width:82%;
+  box-shadow:0 10px 22px rgba(194,24,91,.25);
+  border:2px solid rgba(194,24,91,.15);
+  transform:rotate(-1deg);
+  position:relative;
+  z-index:9999;
+  margin:26px auto 18px;
+}
+
+/* SCREEN 2 LAYER FIX */
+#s2{
+  position:relative;
+  z-index:10;
+}
+
+/* HEARTS */
+.heart{
+  position:absolute;width:18px;height:18px;
+  background:pink;transform:rotate(45deg);
+  animation:float 7s infinite ease-in;
+}
+.heart::before,.heart::after{
+  content:"";position:absolute;width:18px;height:18px;
+  background:pink;border-radius:50%;
+}
+.heart::before{left:-9px}
+.heart::after{top:-9px}
+@keyframes float{
+  0%{bottom:-10%;opacity:0}
+  50%{opacity:.8}
+  100%{bottom:110%;opacity:0}
+}
+.cute-img{
+  width:160px;
+  max-width:70%;
+  margin:20px auto;
+  display:block;
+  z-index:5;
+  position:relative;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div class="screen" id="s1">
+
+  <h1>Hey Cutie Meri Mansuu Meri Rasmalai…</h1>
+    <p>
+    I just wanna ask uh something ?<br>
+    apni bhasa m bolu toh kuchh puchhna h... puchhu?
+  </p>
+  <img src="./panda.png" class="cute-img">
+
+  <div class="hint">(click anywhere)</div>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen hidden" id="s2">
+  <h1>
+    Will uh be my Valentine<br>
+    forever and ever and ever meri rasmalai ky kehti ho haa ya naa? 🤌🏻💝👩‍❤️‍👨
+  </h1>
+
+  <button id="yes">KYU NHI BILKUL BNUGI 💗</button>
+  <button id="no">NAAH 😼</button>
+
+  <div id="noText" class="dialog-box"></div>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen hidden" id="s3">
+  <h1>
+     Dekha… Pta tha mjhe lekin jb haa hi bolna tha toh itne nakhre q kr rhi thi tbse suar... huhh<br>
+    chlo koi na maaf kiya akhir boht pyar krta hu apni rasmalai se ye lo chumma muaahhhhhhhh 😚💗<br>
+    I luvvvvvvv uhhhhhhh sooooooooooooooooooooooo muchhhhhhhhhhhhhhhh meri kuchupuchu meri rasmalai meri dhaniya kanya meri mansiii muahhhh 🤌🏻
+  </h1>
+
+  <div class="dialog-box">
+     Toh kaisa lg rha mera bnke mjaa rha na boht mjhe v aa rha hehe💞<br>
+    Aur waise v tum naa boln k liye nhi pyr krne k liye bni ho wo v sirf mjhe chlo ab pyr kro mjhe bhar bhar k suar tbse nakhre the bs hato aur ek chumma v do pyara sa🤌🏻vc kru??chumma lene k liye😚💗
+  </div>
+</div>
+
+<script>
+/* hearts */
+for(let i=0;i<24;i++){
+  const h=document.createElement('div');
+  h.className='heart';
+  h.style.left=Math.random()*100+'%';
+  h.style.animationDelay=Math.random()*7+'s';
+  document.body.appendChild(h);
+}
+
+/* navigation */
+document.body.addEventListener('click', ()=>{
+  s1.classList.add('hidden');
+  s2.classList.remove('hidden');
+},{once:true});
+
+/* NO texts (UNCHANGED) */
+const noTexts=[
+ "Chhii Mansi tmne no bola Sach me?",
+ "Jao bt mt kro ab merese ab suar",
+ "Ek baar dil se soch lo na",
+ "Itna bura bhi nahi hoon yaar",
+ "YES bolna itna mushkil hai kya?",
+ "Kitne nakhre karogi",
+ "Are ky h jyada nakhre hn haa bolne m kasht ho rha h",
+ "Thoda sa pyaar toh banta hai",
+ "Ab maan bhi jao na please",
+ "Main itna bhi bura nahi hoon 😔",
+ "Dekho meri taraf…",
+ "Ab toh puchna hi nhi chahiye mjhe chhi lekin fir v btao",
+ "Aaj dil tod ke hi manogi kya 💔",
+ "Last chance… warna main ro dunga 😭",
+ "Chhii Mansi dil tod diya tumne",
+ "Are ky h ab jyada nhi ho rha ha bolo warna m khud hi maan luga iss br",
+ "Rhne do chlo tmhari haa h aage badho"
+];
+
+let noCount=0;
+const noBtn=document.getElementById('no');
+const noText=document.getElementById('noText');
+
+/* ONE EVENT — ALWAYS WORKS */
+noBtn.addEventListener('pointerdown',(e)=>{
+  e.preventDefault();
+
+  /* SHOW TEXT FIRST (GUARANTEED) */
+  noText.textContent = noTexts[noCount % noTexts.length];
+  noCount++;
+
+  /* THEN BHAGNA */
+  setTimeout(()=>{
+    noBtn.style.left =
+      Math.random()*(window.innerWidth-120)+'px';
+    noBtn.style.top =
+      Math.random()*(window.innerHeight-120)+'px';
+    noBtn.style.transform =
+      `scale(${1+Math.min(noCount*0.05,0.4)})`;
+  }, 40);
+});
+
+/* YES */
+yes.addEventListener('click',(e)=>{
+  e.stopPropagation();
+  s2.classList.add('hidden');
+  s3.classList.remove('hidden');
+});
+</script>
+
+</body>
+</html>
