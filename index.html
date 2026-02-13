@@ -5,22 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>For You 💗</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Baloo+2:wght@500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Baloo+2:wght@500&family=Patrick+Hand&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
-/* BODY */
 body{
   height:100vh;
   overflow:hidden;
   background:#ffd6e8;
   font-family:'Patrick Hand', cursive;
 }
-
-/* SCREEN */
 .screen{
   position:absolute; inset:0;
   display:flex; flex-direction:column;
@@ -29,20 +23,14 @@ body{
   transition:.6s;
 }
 .hidden{opacity:0;pointer-events:none;transform:scale(.98)}
-
-/* HEADINGS */
 h1{
   font-family:'Patrick Hand', cursive;
   font-size:3rem;
   color:#c2185b;
   transform:rotate(-2deg);
 }
-
-/* HINT */
 p{color:#444;margin-top:10px}
 .hint{opacity:.7;margin-top:18px}
-
-/* BUTTONS */
 button{
   padding:12px 28px;
   margin:10px;
@@ -54,21 +42,20 @@ button{
 #yes{background:#ff4d88;color:#fff}
 #no{background:#fff;color:#333;position:absolute}
 
-/* DIALOG BOX (NO TEXT + OTHER BOXES) */
 .dialog-box{
   margin-top:22px;
   padding:20px 26px;
   max-width:82%;
+  max-height:65vh;
+  overflow-y:auto;
   background:#b0124b;
   color:#fff;
   border-radius:18px;
   font-size:1.35rem;
   line-height:1.6;
   box-shadow:0 12px 28px rgba(0,0,0,.35);
-  letter-spacing:0.5px;
 }
 
-/* FIX: NO TEXT ALWAYS VISIBLE */
 #noText{
   position:fixed;
   bottom:18%;
@@ -78,53 +65,52 @@ button{
   pointer-events:none;
 }
 
-/* FIRST SCREEN ASK TEXT */
-#s1 p{
-  font-family:'Comic Neue', cursive;
-  background:linear-gradient(135deg,#ffd1e8,#fff);
-  padding:20px 26px;
-  border-radius:22px;
-  font-size:1.45rem;
-  line-height:1.6;
-  max-width:82%;
-  box-shadow:0 10px 22px rgba(194,24,91,.25);
-  border:2px solid rgba(194,24,91,.15);
-  transform:rotate(-1deg);
-  position:relative;
-  z-index:9999;
-  margin:26px auto 18px;
-}
-
-/* SCREEN 2 LAYER FIX */
-#s2{
-  position:relative;
-  z-index:10;
-}
-
-/* HEARTS */
-.heart{
-  position:absolute;width:18px;height:18px;
-  background:pink;transform:rotate(45deg);
-  animation:float 7s infinite ease-in;
-}
-.heart::before,.heart::after{
-  content:"";position:absolute;width:18px;height:18px;
-  background:pink;border-radius:50%;
-}
-.heart::before{left:-9px}
-.heart::after{top:-9px}
-@keyframes float{
-  0%{bottom:-10%;opacity:0}
-  50%{opacity:.8}
-  100%{bottom:110%;opacity:0}
-}
 .cute-img{
   width:160px;
   max-width:70%;
   margin:20px auto;
-  display:block;
-  z-index:5;
-  position:relative;
+}
+
+.continue-btn{
+  position:absolute;
+  right:30px;
+  bottom:40px;
+  padding:12px 26px;
+  border-radius:30px;
+  border:none;
+  background:#ff4d88;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+}
+
+#memories{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.mem-title-box{
+  font-size:28px;
+  font-weight:bold;
+  text-align:center;
+  margin-bottom:20px;
+  color:#ff4d6d;
+}
+
+.photo-grid{
+  display:grid;
+  grid-template-columns:repeat(3,120px);
+  gap:18px;
+  justify-content:center;
+}
+.photo-grid img{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:15px;
+  border:3px solid pink;
 }
 </style>
 </head>
@@ -133,14 +119,9 @@ button{
 
 <!-- SCREEN 1 -->
 <div class="screen" id="s1">
-
   <h1>Hey Cutie Meri Mansuu Meri Rasmalai…</h1>
-    <p>
-    I just wanna ask uh something ?<br>
-    mtlb kuchh puchhna h... puchhu?
-  </p>
+  <p>I just wanna ask uh something ?<br>mtlb kuchh puchhna h... puchhu?</p>
   <img src="./panda.png" class="cute-img">
-
   <div class="hint">(click anywhere)</div>
 </div>
 
@@ -154,8 +135,7 @@ button{
     Humesha k liye meri rasmalai bnogi ky kehti ho haa ya naa? 🤌🏻💝👩‍❤️‍👨
   </h1>
 
-  <button id="yes">KYU NHI BILKUL DALWAUGI KY H
-     MAAR DUGI MAI MERA MTLB BNUGI 💗</button>
+  <button id="yes">KYU NHI BILKUL DALWAUGI KY H MAAR DUGI MAI MERA MTLB BNUGI 💗</button>
   <button id="no">NAAH 😼</button>
 
   <div id="noText" class="dialog-box"></div>
@@ -164,34 +144,106 @@ button{
 <!-- SCREEN 3 -->
 <div class="screen hidden" id="s3">
   <h1>
-     Dekha… Pta tha mjhe lekin jb haa hi bolna tha toh itne nakhre q kr rhi thi tbse suar... huhh<br>
+    Dekha… Pta tha mjhe lekin jb haa hi bolna tha toh itne nakhre q kr rhi thi tbse suar... huhh<br>
     chlo koi na maaf kiya akhir boht pyar krta hu apni rasmalai se ye lo chumma muaahhhhhhhh 😚💗<br>
     I luvvvvvvv uhhhhhhh sooooooooooooooooooooooo muchhhhhhhhhhhhhhhh meri kuchupuchu meri rasmalai meri dhaniya kanya meri mansiii muahhhh 🤌🏻
   </h1>
 
   <div class="dialog-box">
-     Toh kaisa lg rha mera bnke mjaa rha na boht mjhe v aa rha hehe💞<br>
-    Aur waise v tum naa boln k liye nhi pyr krne k liye bni ho wo v sirf mjhe chlo ab pyr kro mjhe bhar bhar k suar tbse nakhre the bs hato aur ek chumma v do pyara sa🤌🏻vc kru??chumma lene k liye😚💗
+    Toh kaisa lg rha mera bnke mjaa rha na boht mjhe v aa rha hehe💞<br>
+    Aur waise v tum naa boln k liye nhi pyr krne k liye bni ho wo v sirf mjhe chlo ab pyr kro mjhe bhar bhar k suar tbse nakhre the bs hato aur ek chumma v do pyara sa🤌🏻<br>
+    vc kru?? chumma lene k liye 😚💗
+  </div>
+
+  <button class="continue-btn" onclick="goToMemories()">
+    Aur v kuchh h press kro🤌🏻👩‍❤️‍👨💗→
+  </button>
+</div>
+
+<!-- MEMORIES -->
+<div class="screen hidden" id="memories">
+  <div class="mem-title-box">
+    Our Beautiful Memories👩‍❤️‍👨💗
+    Mansuu Yaad h tmhe hum phli br mile the 👩‍❤️‍👨💗
+    av itne hi photos hn jb agli br milege toh dher sara pictures lena sath m meri introvert cutu🤌🏻👩‍❤️‍👨💗
+  </div>
+
+  <div class="photo-grid">
+    <img src="photo1.jpg.jpeg">
+    <img src="photo2.jpg.jpeg">
+    <img src="photo3.jpg.jpeg">
+    <img src="photo4.jpg.jpeg">
+    <img src="photo5.jpg.jpeg">
+    <img src="photo6.jpg.jpeg">
+  </div>
+
+  <button class="continue-btn" onclick="goToNote()">
+    Aage v kuchh h dekhna chahogi??Haa toh press kro 💖
+  </button>
+</div>
+
+<!-- NOTE -->
+<div class="screen hidden" id="note">
+  <div class="mem-title-box">For My Cute Rasmalai 💌</div>
+
+  <div class="dialog-box">
+    Dear Mansi👩‍❤️‍👨💌, … ( Kbhi kbhi na m ye sochta hu ki kaise mil gyi tum mjhe mtlb hum ek dusre ko tb mile hn jb hum ek dusre ko dhund v nhi rhe the... haha   shyd kismat m likha hoga hmara milna warna iss duniya m 8 billion population 196 countries itni bheed itna shor tum kaha m kaha tum UP me Bareilly ki sundar si ldki ho boht sundar mtlb m ek diehard cricket aur virat kohli fan hu agr cricket ki duniya m kahu toh tum virat kohli ki cover drive jaisi ho bilkul perfect meri dream girl ki trh🤌🏻😚💗 aur m bihar ka ek aawara aur bekar ldka ... hmara koi connection nhi tha phle se na m Up se hu na mere relative na tum bihar se ho na tmhare relative ... kaho toh 0 possibilties hmare milne tk ki itni badi duniya itna bada seher itne sare log ...uske baad v hum mile wo v ek online game p haha... ky kamal unexpected chij hua na mtlb hum waha aur uss time p mile jaha na koi milta aur tb hum ek dusre ko dhund v nhi rhe the ...starting me maine tmse kaha tha ki tmhe ky lgta ye hum kr rhe hn? Humari kahani likhi hui h fir chahe duniya ky duniya k log ky hum khud v ise nhi badl skte aur khte hn na taqdeer humeunhi se milati hn jinse hume milna hota h...🤌🏻😚💗 god's plan shyd isliye hum mile...  23rd july 2024💗 jb hum pehli br mile aise random bewjh maine tmhe boht br wo story v btayi h kitni bakwas thi h na...kuxhh din janne k baad maine tmhe boht mehnat se pta nhi ky ky krke jaise taise bacho ki trh maine tmhe apne liye conveince kiya aur wo date 28th July 2024🤌🏻💗 tmne mjhe haa kaha hum relationship me aaye sb kuchh sahi jane lga boht br misunderstanding aur gltiya v hui kbhi tmse kbhi mjhse pr uss glti ko bhulke ek dusre maaf krke ego ko khtm krke iss relationship ko importance diya ... waqt aise bit gya pta hi nhi chla kb saal gujar gye fir 13th sep 2025🤌🏻😚💗 ko pehli br mile wo date aaj v yaad krta hu m aisa lgta jaise sapno jaisa tha bilkul tmhari trh ekdum perfect existed date🤌🏻😚💗 fir aisa moment unwanted moment aaya jo hum nhi chahte thr kbhi ho fir v hum sath rhe ek dusre ko promise krke kbhi duri nhi aane diya humne dur rhke v wo din h aur aaj ka din h tmhare liye pyr badhta ja rha pr kbhi kam nhi hoga ... tmne boht sudhara h mjhe ek humble responsible well mannered ldka bnaya jisme sirf tmhara fayda  h..haha mjk kr rha i will always grateful for that aur m hmesa aise bnke rehna chahuga taki tmhe khush rkh saku tmhi toh Home minister,high court, supreme court,judge,don sb ho tmhare isharo p nachna hi axha lgta mjhe m proudly keh skta hu ki haa m hu mansi ka gulam apni goru ka gulam ....kehne k liye boht si baate hn pr shabd kam pd jayege bs itna hi kahuga jaise tmnemjhe choose kiya bs waise hi hmesa mere sath jindagi bhar rehna sirf iss valentine aane wale har valentine mere sath rehna aaj ye long distance relationship h kbhi close m badal jayega tbtk mere sath rehna bs itna hi mjhe tmhare siwa kuch nhi chahiye... Thank uh for choosing me thank uh for loving me unconditionally giving so much love and priorities and all the things what do uh do to make me happy... Love uh Mansuuu meri rasamalayi meri cutu meri sweetu mera bachu meri suar sb kuch tmhi ho🫶 and Thankuh for everything bs aise hi hmesa mere sath rho...🤌🏻😚💗
+    )…
+  </div>
+
+  <button class="continue-btn" onclick="goToLast()">
+    Iske baad v h🤌🏻😚💗 press kro →
+  </button>
+</div>
+
+<!-- LAST -->
+<div class="screen hidden" id="last">
+  <h1>Once Again Happy Wala Valentine Day Meri Rasmalai 💖</h1>
+
+  <div class="dialog-box">
+    I love uh sooooooooooooooooooooooo muchhhhhhhhhhhhhhhh ye lo kissiii muaahhhhhhhh😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚😚💗<br>
+    Aaj aur iss valentine itna kafi h ab baad me lena luv uh cutu bhar bhar k hehe..🤌🏻😚💗
   </div>
 </div>
 
 <script>
-/* hearts */
-for(let i=0;i<24;i++){
-  const h=document.createElement('div');
-  h.className='heart';
-  h.style.left=Math.random()*100+'%';
-  h.style.animationDelay=Math.random()*7+'s';
-  document.body.appendChild(h);
-}
+const s1=document.getElementById('s1');
+const s2=document.getElementById('s2');
+const s3=document.getElementById('s3');
+const memories=document.getElementById('memories');
+const note=document.getElementById('note');
+const last=document.getElementById('last');
 
-/* navigation */
-document.body.addEventListener('click', ()=>{
-  s1.classList.add('hidden');
-  s2.classList.remove('hidden');
+document.body.addEventListener('click',()=>{
+  if(!s1.classList.contains('hidden')){
+    s1.classList.add('hidden');
+    s2.classList.remove('hidden');
+  }
 },{once:true});
 
-/* NO texts (UNCHANGED) */
+document.getElementById('yes').addEventListener('click',(e)=>{
+  e.stopPropagation();
+  s2.classList.add('hidden');
+  s3.classList.remove('hidden');
+});
+
+function goToMemories(){
+  s3.classList.add('hidden');
+  memories.classList.remove('hidden');
+}
+function goToNote(){
+  memories.classList.add('hidden');
+  note.classList.remove('hidden');
+}
+function goToLast(){
+  note.classList.add('hidden');
+  last.classList.remove('hidden');
+}
+
+/* NO BUTTON LOGIC */
+const noBtn=document.getElementById('no');
+const noText=document.getElementById('noText');
+
 const noTexts=[
  "Chhii Mansi tmne no bola Sach me?",
  "Jao bt mt kro ab merese ab suar",
@@ -213,33 +265,17 @@ const noTexts=[
 ];
 
 let noCount=0;
-const noBtn=document.getElementById('no');
-const noText=document.getElementById('noText');
 
-/* ONE EVENT — ALWAYS WORKS */
 noBtn.addEventListener('pointerdown',(e)=>{
   e.preventDefault();
-
-  /* SHOW TEXT FIRST (GUARANTEED) */
-  noText.textContent = noTexts[noCount % noTexts.length];
+  noText.textContent=noTexts[noCount % noTexts.length];
   noCount++;
 
-  /* THEN BHAGNA */
   setTimeout(()=>{
-    noBtn.style.left =
-      Math.random()*(window.innerWidth-120)+'px';
-    noBtn.style.top =
-      Math.random()*(window.innerHeight-120)+'px';
-    noBtn.style.transform =
-      `scale(${1+Math.min(noCount*0.05,0.4)})`;
-  }, 40);
-});
-
-/* YES */
-yes.addEventListener('click',(e)=>{
-  e.stopPropagation();
-  s2.classList.add('hidden');
-  s3.classList.remove('hidden');
+    noBtn.style.left=Math.random()*(window.innerWidth-120)+'px';
+    noBtn.style.top=Math.random()*(window.innerHeight-120)+'px';
+    noBtn.style.transform=`scale(${1+Math.min(noCount*0.05,0.4)})`;
+  },40);
 });
 </script>
 
